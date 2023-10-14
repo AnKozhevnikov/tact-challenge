@@ -29,16 +29,18 @@ contract Task2 with Deployable {
   
   receive(msg: Refund) {
     let c : Cell = (beginCell().storeAddress(msg.sender)).endCell();
-    send(SendParameters{
-      to: self.admin,
-      value: self.value, 
-      mode: SendIgnoreErrors, 
-      bounce: false, 
-      body: c
-    });
+    if (self.admin == msg.sender) {
+      send(SendParameters{
+        to: self.admin,
+        value: self.value, 
+        mode: SendIgnoreErrors, 
+        bounce: false, 
+        body: c
+      });
+    }
   }
 
   receive(msg: Slice) {
-    
+    let ad : Address = msg.body;
   }
 }
