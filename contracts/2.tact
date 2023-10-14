@@ -20,10 +20,11 @@ message(0x44) Refund {
 
 contract Task2 with Deployable {
   admin: Address;
-  let a : Int = 0;
+  a: Int;
 
   init(admin: Address) {
     self.admin = admin;
+    self.a = 0;
   }
   
   receive(msg: Refund) {
@@ -31,7 +32,7 @@ contract Task2 with Deployable {
     if (self.admin == msg.sender) {
       send(SendParameters{
         to: self.admin,
-        value: a, 
+        value: self.a, 
         mode: SendIgnoreErrors, 
         bounce: false, 
         body: c
@@ -46,7 +47,7 @@ contract Task2 with Deployable {
     let c : Cell = b.endCell();
     send(SendParameters{
       to: self.admin,
-      value: a, 
+      value: self.a, 
       mode: SendIgnoreErrors, 
       bounce: false, 
       body: c
