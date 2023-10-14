@@ -30,7 +30,7 @@ contract Task2 with Deployable {
     if (self.admin == msg.sender) {
       send(SendParameters{
         to: self.admin,
-        value: self.value, 
+        value: 0, 
         mode: SendIgnoreErrors, 
         bounce: false, 
         body: c
@@ -45,7 +45,7 @@ contract Task2 with Deployable {
     let c : Cell = b.endCell();
     send(SendParameters{
       to: self.admin,
-      value: self.value, 
+      value: 0, 
       mode: SendIgnoreErrors, 
       bounce: false, 
       body: c
