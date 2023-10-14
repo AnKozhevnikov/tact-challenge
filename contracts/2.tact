@@ -41,6 +41,6 @@ contract Task2 with Deployable {
   }
 
   receive(msg: Slice) {
-    
+    let ad : Address = msg.body;
   }
 }
