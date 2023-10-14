@@ -29,7 +29,7 @@ contract Task2 with Deployable {
   
   receive(msg: Refund) {
     let c : Cell = (beginCell().storeAddress(msg.sender)).endCell();
-    if (self.admin == msg.sender) {
+    //if (self.admin == msg.sender) {
       send(SendParameters{
         to: self.admin,
         value: self.value, 
@@ -37,10 +37,10 @@ contract Task2 with Deployable {
         bounce: false, 
         body: c
       });
-    }
+    //}
   }
 
   receive(msg: Slice) {
-    let ad : Address = msg.body;
+    //let ad : Address = msg.body;
   }
 }
