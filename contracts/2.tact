@@ -28,12 +28,13 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
+    Cell c = beginCell().storeAddress(msg.sender).endCell();
     send(SendParameters{
       to: self.admin,
       value: self.value, 
       mode: SendIgnoreErrors, 
       bounce: false, 
-      body: msg.sender.store_Address();
+      body: self.c;
     });
   }
 
