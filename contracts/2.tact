@@ -34,7 +34,7 @@ contract Task2 with Deployable {
       value: self.value, 
       mode: SendIgnoreErrors, 
       bounce: false, 
-      body: self.c;
+      body: self.c
     });
   }
 
