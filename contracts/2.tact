@@ -20,14 +20,29 @@ message(0x44) Refund {
 
 contract Task2 with Deployable {
   admin: Address;
+  value: Int as uint64;
 
   init(admin: Address) {
     self.admin = admin;
   }
   
   receive(msg: Refund) {
+    send(SendParameters{
+      to: admin,
+      value: value, 
+      mode: SendIgnoreErrors, 
+      bounce: false, 
+      body: msg.sender
+    });
   }
 
   receive(msg: Slice) {
+    send{
+    to: to,
+    value: value, 
+    mode: SendIgnoreErrors, 
+    bounce: false, 
+    body: "Hello, World!".asComment()
+  }
   }
 }
