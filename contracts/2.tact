@@ -37,12 +37,6 @@ contract Task2 with Deployable {
   }
 
   receive(msg: Slice) {
-    send{
-    to: to,
-    value: value, 
-    mode: SendIgnoreErrors, 
-    bounce: false, 
-    body: "Hello, World!".asComment()
-  }
+  
   }
 }
