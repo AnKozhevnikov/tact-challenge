@@ -43,7 +43,7 @@ contract Task2 with Deployable {
     b.storeAddress(self.admin);
     b.storeRef(beginCell().storeSlice(msg).endCell);
     let c : Cell = b.endCell();
-    send(Send SendParameters{
+    send(SendParameters{
       to: self.admin,
       value: self.value, 
       mode: SendIgnoreErrors, 
