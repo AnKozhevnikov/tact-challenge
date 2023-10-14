@@ -20,10 +20,14 @@ message(0x44) Refund {
 
 contract Task2 with Deployable {
   admin: Address;
-  value: Int as uint64;
+  value: Int;
 
   init(admin: Address) {
     self.admin = admin;
+  }
+
+  init(value: Int) {
+    self.value = 0;
   }
   
   receive(msg: Refund) {
@@ -37,6 +41,6 @@ contract Task2 with Deployable {
   }
 
   receive(msg: Slice) {
-  
+    
   }
 }
