@@ -25,11 +25,11 @@ contract Task1 with Deployable {
     }
 
     receive(msg: Add) {
-      self.counter += number;
+      self.counter = self.counter + number;
     }
     
     receive(msg: Subtract) {
-      self.counter -= number;
+      self.counter = self.counter - number;
     }
 
     get fun counter(): Int {
