@@ -24,9 +24,6 @@ contract Task2 with Deployable {
 
   init(admin: Address) {
     self.admin = admin;
-  }
-
-  init(value: Int) {
     self.value = 0;
   }
   
