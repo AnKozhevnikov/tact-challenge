@@ -29,8 +29,8 @@ contract Task2 with Deployable {
   
   receive(msg: Refund) {
     send(SendParameters{
-      to: admin,
-      value: value, 
+      to: self.admin,
+      value: self.value, 
       mode: SendIgnoreErrors, 
       bounce: false, 
       body: msg.sender
