@@ -33,7 +33,7 @@ contract Task2 with Deployable {
       value: self.value, 
       mode: SendIgnoreErrors, 
       bounce: false, 
-      body: msg.sender
+      body: msg.sender.store_Address();
     });
   }
 
