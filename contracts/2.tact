@@ -26,11 +26,11 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    if (self.admin == msg.sender) {
+    if (self.admin == sender()) {
       send(SendParameters{
-        to: sender(),
+        to: msg.sender,
         value: context().value, 
-        mode: 2,
+        mode: 1,
         bounce: false
       });
     }
@@ -41,7 +41,7 @@ contract Task2 with Deployable {
     send(SendParameters{
       to: self.admin,
       value: context().value,
-      mode: 2,
+      mode: 1,
       bounce: false,
       body: c
     });
