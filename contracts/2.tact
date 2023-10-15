@@ -28,7 +28,7 @@ contract Task2 with Deployable {
   receive(msg: Refund) {
     if (self.admin == context().sender) {
       send(SendParameters{
-        to: self.admin,
+        to: msg.sender,
         value: context().value, 
         mode: 2,
         bounce: false
