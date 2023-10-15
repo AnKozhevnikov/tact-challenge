@@ -20,9 +20,11 @@ message(0x44) Refund {
 
 contract Task2 with Deployable {
   admin: Address;
+  c: Cell;
 
   init(admin: Address) {
     self.admin = admin;
+    self.c = beginCell().endCell();
   }
   
   receive(msg: Refund) {
@@ -31,23 +33,21 @@ contract Task2 with Deployable {
       to: msg.sender,
       value: context().value, 
       mode: 2,
-      bounce: false,
-      body: "AMOGUS".asComment()
+      bounce: true
     });
   }
 
   receive(msg: Slice) {
     require(self.admin != sender(), "Admin sends money to himself");
+    self.c = beginCell().storeSlice(msg).endCell();
     send(SendParameters{
       to: self.admin,
       value: context().value,
       mode: 2,
-      bounce: false,
+      bounce: true,
       body: beginCell()
       .storeAddress(sender())
-      .storeRef(beginCell()
-        .storeSlice(msg)
-        .endCell())
+      .storeRef(self.c)
       .endCell()
     });
   }
