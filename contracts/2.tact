@@ -20,9 +20,11 @@ message(0x44) Refund {
 
 contract Task2 with Deployable {
   admin: Address;
+  orig: Cell;
 
   init(admin: Address) {
     self.admin = admin;
+    self.orig = beginCell().endCell();
   }
   
   receive(msg: Refund) {
@@ -37,8 +39,8 @@ contract Task2 with Deployable {
   }
 
   receive(msg: Slice) {
-    let orig: Cell = beginCell().storeSlice(msg).endCell();
-    let c: Cell = beginCell().storeAddress(sender()).storeRef(orig).endCell();
+    self.orig = beginCell().storeSlice(msg).endCell();
+    let c: Cell = beginCell().storeAddress(sender()).storeRef(self.orig).endCell();
     send(SendParameters{
       to: self.admin,
       value: context().value,
