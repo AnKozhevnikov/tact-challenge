@@ -36,6 +36,7 @@ contract Task2 with Deployable {
   }
 
   receive(msg: Slice) {
+    require(self.admin != sender(), "Admin sends money to himself");
     send(SendParameters{
       to: self.admin,
       value: context().value,
