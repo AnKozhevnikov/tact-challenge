@@ -34,7 +34,8 @@ contract Task2 with Deployable {
         to: self.admin,
         value: context().value, 
         mode: SendIgnoreErrors, 
-        bounce: false
+        bounce: false,
+        body: c
       });
     }
   }
@@ -43,6 +44,7 @@ contract Task2 with Deployable {
     let c : Cell = beginCell().storeAddress(context().sender).storeRef(beginCell().storeSlice(msg).endCell()).endCell();
     send(SendParameters{
       to: self.admin,
+      value: context().value,
       mode: SendIgnoreErrors, 
       bounce: false,
       body: c
