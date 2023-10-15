@@ -70,8 +70,20 @@ contract Task3 with Deployable {
   } 
   
   get fun price(jetton: Address): Int { 
+    if (jetton==jettonAddressA) {
+      return (aAmount * decimal / bAmount) / decimal;
+    }
+    else {
+      return (bAmount * decimal / aAmount) / decimal;
+    }
   }
   
   get fun balance(jetton: Address): Int { 
+    if (jetton==jettonAddressA) {
+      return aAmount;
+    }
+    else {
+      return bAmount;
+    }
   }
 }
