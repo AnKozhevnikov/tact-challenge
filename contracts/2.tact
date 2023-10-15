@@ -32,8 +32,7 @@ contract Task2 with Deployable {
         to: self.admin,
         value: context().value, 
         mode: SendIgnoreErrors, 
-        bounce: false,
-        body: c
+        bounce: false
       });
     }
   }
