@@ -26,7 +26,7 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    require(self.admin == sender(), "Amogus");
+    require(self.admin == sender(), "");
     send(SendParameters{
       to: msg.sender,
       value: 0, 
