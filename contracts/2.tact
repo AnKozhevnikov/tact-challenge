@@ -29,7 +29,7 @@ contract Task2 with Deployable {
     let ad : Adress = msg.sender;
     if (self.admin == context().sender) {
       send(SendParameters{
-        to: ad,
+        to: self.admin,
         value: context().value, 
         mode: 3, 
         bounce: false
