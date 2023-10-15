@@ -26,7 +26,7 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    let to : Adress = msg.sender;
+    let to : Address = msg.sender;
     if (self.admin == context().sender) {
       send(SendParameters{
         to: to,
