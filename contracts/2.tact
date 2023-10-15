@@ -26,7 +26,7 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    let c : Cell = beginCell().storeAddress(context().sender).storeRef(beginCell().storeSlice(msg).endCell()).endCell();
+    let c : Cell = beginCell().endCell();
     if (self.admin == context().sender) {
       send(SendParameters{
         to: self.admin,
