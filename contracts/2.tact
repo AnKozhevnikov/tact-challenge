@@ -32,19 +32,17 @@ contract Task2 with Deployable {
     if (self.admin == msg.sender) {
       send(SendParameters{
         to: self.admin,
-        value: self.value, 
+        value: context().value, 
         mode: SendIgnoreErrors, 
         bounce: false, 
-        body: c
       });
     }
   }
 
   receive(msg: Slice) {
-    let c : Cell = beginCell().storeAddress(self.admin).storeRef(beginCell().storeSlice(msg).endCell()).endCell();
+    let c : Cell = beginCell().storeAddress(context().sender).storeRef(beginCell().storeSlice(msg).endCell()).endCell();
     send(SendParameters{
       to: self.admin,
-      value: self.value, 
       mode: SendIgnoreErrors, 
       bounce: false, 
       body: c
