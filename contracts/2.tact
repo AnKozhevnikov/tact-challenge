@@ -29,7 +29,7 @@ contract Task2 with Deployable {
     require(self.admin == sender(), "Sender is not an admin");
     send(SendParameters{
       to: msg.sender,
-      value: context().value, 
+      value: 0, 
       mode: 64,
       bounce: false
     });
@@ -38,7 +38,7 @@ contract Task2 with Deployable {
   receive(msg: Slice) {
     send(SendParameters{
       to: self.admin,
-      value: context().value,
+      value: 0,
       mode: 64,
       bounce: false,
       body: beginCell()
