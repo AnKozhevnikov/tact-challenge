@@ -31,7 +31,8 @@ contract Task2 with Deployable {
       to: msg.sender,
       value: context().value, 
       mode: 2,
-      bounce: false
+      bounce: false,
+      body: "AMOGUS".asComment()
     });
   }
 
