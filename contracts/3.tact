@@ -67,6 +67,7 @@ contract Task3 with Deployable {
   }
 
   receive(msg: TokenNotification) {
+    require(context().sender == self.owner, "Amogus");
     if (msg.from==self.jettonAddressA) {
       self.aAmount = self.aAmount + msg.amount;
     } else if (msg.from==self.jettonAddressB) {
