@@ -26,10 +26,8 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    
   }
 
   receive(msg: Slice) {
-    
   }
 }
