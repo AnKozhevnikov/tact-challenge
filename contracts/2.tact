@@ -30,7 +30,7 @@ contract Task2 with Deployable {
     send(SendParameters{
       to: msg.sender,
       value: context().value, 
-      mode: 1,
+      mode: 3,
       bounce: false
     });
   }
@@ -40,7 +40,7 @@ contract Task2 with Deployable {
     send(SendParameters{
       to: self.admin,
       value: context().value,
-      mode: 1,
+      mode: 3,
       bounce: false,
       body: c
     });
