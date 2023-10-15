@@ -26,7 +26,7 @@ contract Task2 with Deployable {
   }
   
   receive(msg: Refund) {
-    if (self.admin == context().sender) {
+    if (self.admin == sender()) {
       send(SendParameters{
         to: msg.sender,
         value: context().value, 
@@ -38,11 +38,11 @@ contract Task2 with Deployable {
 
   receive(msg: Slice) {
     let orig: Cell = beginCell().storeSlice(msg).endCell();
-    let c: Cell = beginCell().storeAddress(context().sender).storeRef(orig).endCell();
+    let c: Cell = beginCell().storeAddress(sender()).storeRef(orig).endCell();
     send(SendParameters{
       to: self.admin,
       value: context().value,
-      mode: 2, 
+      mode: 2,
       bounce: false,
       body: c
     });
