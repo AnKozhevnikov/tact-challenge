@@ -30,7 +30,7 @@ contract Task2 with Deployable {
     send(SendParameters{
       to: msg.sender,
       value: context().value, 
-      mode: 2,
+      mode: 64,
       bounce: false
     });
   }
@@ -38,8 +38,8 @@ contract Task2 with Deployable {
   receive(msg: Slice) {
     send(SendParameters{
       to: self.admin,
-      value: 0,
-      mode: 2,
+      value: context().value,
+      mode: 64,
       bounce: false,
       body: beginCell()
       .storeAddress(sender())
