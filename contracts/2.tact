@@ -24,7 +24,7 @@ contract Task2 with Deployable {
     send(SendParameters{
       to: msg.sender,
       value: 0,
-      bounce: false,
+      bounce: true,
       mode: 64
     });
   }
