@@ -29,7 +29,8 @@ contract Task2 with Deployable {
     require(self.admin == sender(), "");
     send(SendParameters{
       to: msg.sender,
-      value: 0, 
+      value: 0,
+      bounce: false,
       mode: 64
     });
   }
