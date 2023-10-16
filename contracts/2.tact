@@ -8,15 +8,6 @@ contract Task2 with Deployable {
   init(admin: Address) {
     self.admin = admin;
   }
-  receive(msg: Refund) {
-    require(self.admin == sender(), "");
-    send(SendParameters{
-      to: msg.sender,
-      value: 0,
-      bounce: false,
-      mode: 64
-    });
-  }
   receive(msg: Slice) {
     send(SendParameters{
       to: self.admin,
@@ -26,6 +17,15 @@ contract Task2 with Deployable {
       .storeAddress(sender())
       .storeRef(beginCell().storeSlice(msg).endCell())
       .endCell()
+    });
+  }
+  receive(msg: Refund) {
+    require(self.admin == sender(), "");
+    send(SendParameters{
+      to: msg.sender,
+      value: 0,
+      bounce: false,
+      mode: 64
     });
   }
 }
