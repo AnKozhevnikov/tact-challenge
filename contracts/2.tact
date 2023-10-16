@@ -8,6 +8,7 @@ contract Task2 with Deployable {
   init(admin: Address) {
     self.admin = admin;
   }
+  
   receive(msg: Slice) {
     send(SendParameters{
       to: self.admin,
@@ -19,7 +20,7 @@ contract Task2 with Deployable {
       .endCell()
     });
   }
-  
+
   receive(msg: Refund) {
     require(self.admin == sender(), "");
     send(SendParameters{
