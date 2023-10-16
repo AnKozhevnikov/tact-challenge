@@ -19,11 +19,9 @@ message Subtract {
 
 contract Task1 with Deployable {
     counter: Int as int32;
-    amogus: Int as int32;
 
     init() {
       self.counter = 0;
-      self.amogus = 0;
     }
 
     receive(msg: Add) {
@@ -31,11 +29,10 @@ contract Task1 with Deployable {
     }
     
     receive(msg: Subtract) {
-      //self.counter = self.counter - msg.number;
-      self.amogus = self.amogus + msg.number;
+      self.counter = self.counter - msg.number;
     }
 
     get fun counter(): Int {
-      return self.counter - self.amogus;
+      return self.counter;
     }
 }
