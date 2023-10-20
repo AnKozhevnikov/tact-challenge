@@ -80,7 +80,6 @@ contract Task3 with Deployable {
         if (msg.amount <= self.bAmount) {
           let toSend: Int = (self.aAmount * self.decimal / self.bAmount) * msg.amount / self.decimal;
           send(SendParameters{
-            bounce: false,
             to: self.jettonAddressA,
             value: 0, 
             mode: 64, 
@@ -98,7 +97,6 @@ contract Task3 with Deployable {
           self.bAmount = self.bAmount + msg.amount;
         } else {
           send(SendParameters{
-            bounce: false,
             to: self.jettonAddressB,
             value: 0, 
             mode: 64, 
@@ -117,7 +115,6 @@ contract Task3 with Deployable {
         if (msg.amount <= self.aAmount) {
           let toSend: Int = (self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal;
           send(SendParameters{
-            bounce: false,
             to: self.jettonAddressB,
             value: 0, 
             mode: 64, 
@@ -135,7 +132,6 @@ contract Task3 with Deployable {
           self.aAmount = self.aAmount + msg.amount;
         } else {
           send(SendParameters{
-            bounce: false,
             to: self.jettonAddressA,
             value: 0, 
             mode: 64, 
