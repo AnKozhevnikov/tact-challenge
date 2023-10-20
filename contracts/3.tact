@@ -159,7 +159,7 @@ contract Task3 with Deployable {
     if (self.aAmount==0 || self.bAmount==0) {
       return 0;
     }
-    if (jetton==self.jettonAddressA) {
+    else if (jetton==self.jettonAddressA) {
       return self.bAmount * self.decimal / self.aAmount;
     }
     else {
