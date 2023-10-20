@@ -91,7 +91,7 @@ contract Task3 with Deployable {
           forwardPayload: emptySlice()
         };
         let ad: Address = myAddress();
-        if (toSend<self.aAmount) {
+        if (toSend > self.aAmount) {
           toTransfer.amount=msg.amount;
           ad=self.jettonAddressA;
         }
@@ -122,7 +122,7 @@ contract Task3 with Deployable {
           forwardPayload: emptySlice()
         };
         let ad: Address = myAddress();
-        if (toSend<self.bAmount) {
+        if (toSend > self.bAmount) {
           toTransfer.amount=msg.amount;
           ad=self.jettonAddressB;
         }
