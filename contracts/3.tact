@@ -70,7 +70,7 @@ contract Task3 with Deployable {
     require(sender() == self.jettonAddressA || sender() == self.jettonAddressB, "Amogus");
 
     if (msg.from==self.owner) {
-      if(sender() == self.jettonAddressA) {
+      if(context().sender == self.jettonAddressA) {
         self.aAmount = self.aAmount + msg.amount;
       }
       else{
@@ -79,7 +79,7 @@ contract Task3 with Deployable {
       return;
     }
 
-    if (sender()==self.jettonAddressA) {
+    if (context().sender==self.jettonAddressA) {
         let toSend: Int = (self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal;
         let toTransfer: TokenTransfer = TokenTransfer{
           queryId: 0,
