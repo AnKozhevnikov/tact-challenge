@@ -96,6 +96,7 @@ contract Task3 with Deployable {
           });
         }
         else {
+          let toSend: Int = (self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal;
           send(SendParameters{
             bounce: false,
             to: self.jettonAddressB,
@@ -103,7 +104,7 @@ contract Task3 with Deployable {
             mode: 64, 
             body: TokenTransfer{
               queryId: 0,
-              amount: (self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal,
+              amount: toSend,
               destination: msg.from,
               responseDestination: myAddress(),
               customPayload: null,
@@ -111,7 +112,7 @@ contract Task3 with Deployable {
               forwardPayload: emptySlice()
             }.toCell()
           });
-          self.bAmount = self.bAmount - ((self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal);
+          self.bAmount = self.bAmount - toSend;
           self.aAmount = self.aAmount + msg.amount;
         }
     }
@@ -134,6 +135,7 @@ contract Task3 with Deployable {
           });
         }
         else {
+          let toSend: Int = (self.aAmount * self.decimal / self.bAmount) * msg.amount / self.decimal;
           send(SendParameters{
             bounce: false,
             to: self.jettonAddressA,
@@ -141,7 +143,7 @@ contract Task3 with Deployable {
             mode: 64, 
             body: TokenTransfer{
               queryId: 0,
-              amount: (self.aAmount * self.decimal / self.bAmount) * msg.amount / self.decimal,
+              amount: toSend,
               destination: msg.from,
               responseDestination: myAddress(),
               customPayload: null,
@@ -149,7 +151,7 @@ contract Task3 with Deployable {
               forwardPayload: emptySlice()
             }.toCell()
           });
-          self.aAmount = self.aAmount - ((self.aAmount * self.decimal / self.bAmount) * msg.amount / self.decimal);
+          self.aAmount = self.aAmount - toSend;
           self.bAmount = self.bAmount + msg.amount;
         }
     }
