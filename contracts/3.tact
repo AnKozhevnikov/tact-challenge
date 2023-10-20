@@ -79,16 +79,16 @@ contract Task3 with Deployable {
   
   get fun price(jetton: Address): Int { 
     if (jetton==self.jettonAddressA) {
-      if (self.aAmount==0) {
-        return 0;
-      }
-      return self.bAmount * self.decimal / self.aAmount;
-    }
-    else if (jetton==self.jettonAddressB){
       if (self.bAmount==0) {
         return 0;
       }
       return self.aAmount * self.decimal / self.bAmount;
+    }
+    else if (jetton==self.jettonAddressB){
+      if (self.aAmount==0) {
+        return 0;
+      }
+      return self.bAmount * self.decimal / self.aAmount;
     }
     else {
       return 0;
