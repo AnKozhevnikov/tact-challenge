@@ -98,8 +98,8 @@ contract Task3 with Deployable {
         else {
           toTransfer.amount=toSend;
           ad=self.jettonAddressB;
-          self.bAmount = self.bAmount + msg.amount;
-          self.aAmount = self.aAmount - toSend;
+          self.aAmount = self.aAmount + msg.amount;
+          self.bAmount = self.bAmount - toSend;
         }
 
         send(SendParameters{
@@ -129,8 +129,8 @@ contract Task3 with Deployable {
         else {
           toTransfer.amount=toSend;
           ad=self.jettonAddressA;
-          self.aAmount = self.aAmount + msg.amount;
-          self.bAmount = self.bAmount - toSend;
+          self.bAmount = self.bAmount + msg.amount;
+          self.aAmount = self.aAmount - toSend;
         }
 
         send(SendParameters{
