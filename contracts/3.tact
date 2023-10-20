@@ -80,37 +80,6 @@ contract Task3 with Deployable {
     }
 
     if (sender()==self.jettonAddressA) {
-        let toSend: Int = (self.aAmount * self.decimal / self.bAmount) * msg.amount / self.decimal;
-        let toTransfer: TokenTransfer = TokenTransfer{
-          queryId: 12345,
-          amount: 0,
-          destination: msg.from,
-          responseDestination: myAddress(),
-          customPayload: null,
-          forwardTonAmount: ton("0.1"),
-          forwardPayload: emptySlice()
-        };
-        let ad: Address = myAddress();
-        if (toSend > self.aAmount) {
-          toTransfer.amount=msg.amount;
-          ad=self.jettonAddressA;
-        }
-        else {
-          toTransfer.amount=toSend;
-          ad=self.jettonAddressB;
-          self.aAmount = self.aAmount + msg.amount;
-          self.bAmount = self.bAmount - toSend;
-        }
-
-        send(SendParameters{
-          to: ad,
-          value: 0, 
-          mode: SendRemainingValue, 
-          bounce: true, 
-          body: toTransfer.toCell()
-        });
-    }
-    else {
         let toSend: Int = (self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal;
         let toTransfer: TokenTransfer = TokenTransfer{
           queryId: 12345,
@@ -131,6 +100,37 @@ contract Task3 with Deployable {
           ad=self.jettonAddressA;
           self.bAmount = self.bAmount + msg.amount;
           self.aAmount = self.aAmount - toSend;
+        }
+
+        send(SendParameters{
+          to: ad,
+          value: 0, 
+          mode: SendRemainingValue, 
+          bounce: true, 
+          body: toTransfer.toCell()
+        });
+    }
+    else {
+        let toSend: Int = (self.aAmount * self.decimal / self.bAmount) * msg.amount / self.decimal;
+        let toTransfer: TokenTransfer = TokenTransfer{
+          queryId: 12345,
+          amount: 0,
+          destination: msg.from,
+          responseDestination: myAddress(),
+          customPayload: null,
+          forwardTonAmount: ton("0.1"),
+          forwardPayload: emptySlice()
+        };
+        let ad: Address = myAddress();
+        if (toSend > self.aAmount) {
+          toTransfer.amount=msg.amount;
+          ad=self.jettonAddressA;
+        }
+        else {
+          toTransfer.amount=toSend;
+          ad=self.jettonAddressB;
+          self.aAmount = self.aAmount + msg.amount;
+          self.bAmount = self.bAmount - toSend;
         }
 
         send(SendParameters{
