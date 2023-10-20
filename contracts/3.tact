@@ -93,11 +93,11 @@ contract Task3 with Deployable {
         let ad: Address = myAddress();
         if (toSend > self.bAmount) {
           toTransfer.amount=msg.amount;
-          ad=self.jettonAddressB;
+          ad=self.jettonAddressA;
         }
         else {
           toTransfer.amount=toSend;
-          ad=self.jettonAddressA;
+          ad=self.jettonAddressB;
           self.bAmount = self.bAmount + msg.amount;
           self.aAmount = self.aAmount - toSend;
         }
@@ -124,11 +124,11 @@ contract Task3 with Deployable {
         let ad: Address = myAddress();
         if (toSend > self.aAmount) {
           toTransfer.amount=msg.amount;
-          ad=self.jettonAddressA;
+          ad=self.jettonAddressB;
         }
         else {
           toTransfer.amount=toSend;
-          ad=self.jettonAddressB;
+          ad=self.jettonAddressA;
           self.aAmount = self.aAmount + msg.amount;
           self.bAmount = self.bAmount - toSend;
         }
