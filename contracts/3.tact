@@ -76,10 +76,8 @@ contract Task3 with Deployable {
       else{
         self.bAmount = self.bAmount + msg.amount;
       }
-      return;
     }
-
-    if (context().sender==self.jettonAddressA) {
+    else if (context().sender==self.jettonAddressA) {
         if (((self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal) > self.bAmount) {
           send(SendParameters{
             to: self.jettonAddressA,
@@ -160,13 +158,17 @@ contract Task3 with Deployable {
     if (jetton==self.jettonAddressA) {
       return self.bAmount * self.decimal / self.aAmount;
     }
-    return self.aAmount * self.decimal / self.bAmount;
+    else {
+      return self.aAmount * self.decimal / self.bAmount;
+    }
   }
   
   get fun balance(jetton: Address): Int { 
     if (jetton == self.jettonAddressA) {
       return self.aAmount;
     }
-    return self.bAmount;
+    else {
+      return self.bAmount;
+    }
   }
 }
