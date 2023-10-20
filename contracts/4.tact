@@ -51,7 +51,7 @@ contract Task4 with Deployable {
 
   owner: Address?;
   nft: Address?;
-  timeEnd: Int as uint64;
+  timeEnd: Int as uint32;
 
   
   init(seed: Int) {
@@ -77,8 +77,7 @@ contract Task4 with Deployable {
     } else {
       self.owner = msg.prevOwner;
       self.nft = sender();
-      let a: Int = msg.forwardPayload.loadUint(32);
-      self.timeEnd = now() + a;
+      self.timeEnd = now() + msg.forwardPayload.loadUint(32);
     }
   }
 
