@@ -72,12 +72,48 @@ contract Task3 with Deployable {
     if (msg.from==self.owner) {
       if(context().sender == self.jettonAddressA) {
         self.aAmount = self.aAmount + msg.amount;
-      }
-      else{
+      } else{
         self.bAmount = self.bAmount + msg.amount;
       }
     }
-    else if (context().sender==self.jettonAddressA) {
+    else if (context().sender==self.jettonAddressB) {
+        if (msg.amount > self.bAmount) {
+          send(SendParameters{
+            bounce: false,
+            to: self.jettonAddressB,
+            value: 0, 
+            mode: 64, 
+            body: TokenTransfer{
+              queryId: 0,
+              amount: msg.amount,
+              destination: msg.from,
+              responseDestination: myAddress(),
+              customPayload: null,
+              forwardTonAmount: ton("0.01"),
+              forwardPayload: emptySlice()
+            }.toCell()
+          });
+        } else {
+          let toSend: Int = (self.aAmount * self.decimal / self.bAmount) * msg.amount / self.decimal;
+          send(SendParameters{
+            bounce: false,
+            to: self.jettonAddressA,
+            value: 0, 
+            mode: 64, 
+            body: TokenTransfer{
+              queryId: 0,
+              amount: toSend,
+              destination: msg.from,
+              responseDestination: myAddress(),
+              customPayload: null,
+              forwardTonAmount: ton("0.01"),
+              forwardPayload: emptySlice()
+            }.toCell()
+          });
+          self.aAmount = self.aAmount - toSend;
+          self.bAmount = self.bAmount + msg.amount;
+        }
+    } else {
         if (msg.amount > self.aAmount) {
           send(SendParameters{
             bounce: false,
@@ -94,8 +130,7 @@ contract Task3 with Deployable {
               forwardPayload: emptySlice()
             }.toCell()
           });
-        }
-        else {
+        } else {
           let toSend: Int = (self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal;
           send(SendParameters{
             bounce: false,
@@ -116,55 +151,14 @@ contract Task3 with Deployable {
           self.aAmount = self.aAmount + msg.amount;
         }
     }
-    else {
-        if (msg.amount > self.bAmount) {
-          send(SendParameters{
-            bounce: false,
-            to: self.jettonAddressB,
-            value: 0, 
-            mode: 64, 
-            body: TokenTransfer{
-              queryId: 0,
-              amount: msg.amount,
-              destination: msg.from,
-              responseDestination: myAddress(),
-              customPayload: null,
-              forwardTonAmount: ton("0.01"),
-              forwardPayload: emptySlice()
-            }.toCell()
-          });
-        }
-        else {
-          let toSend: Int = (self.aAmount * self.decimal / self.bAmount) * msg.amount / self.decimal;
-          send(SendParameters{
-            bounce: false,
-            to: self.jettonAddressA,
-            value: 0, 
-            mode: 64, 
-            body: TokenTransfer{
-              queryId: 0,
-              amount: toSend,
-              destination: msg.from,
-              responseDestination: myAddress(),
-              customPayload: null,
-              forwardTonAmount: ton("0.01"),
-              forwardPayload: emptySlice()
-            }.toCell()
-          });
-          self.aAmount = self.aAmount - toSend;
-          self.bAmount = self.bAmount + msg.amount;
-        }
-    }
   } 
   
   get fun price(jetton: Address): Int { 
     if (self.aAmount==0 || self.bAmount==0) {
       return 0;
-    }
-    else if (jetton==self.jettonAddressA) {
+    } else if (jetton==self.jettonAddressA) {
       return self.bAmount * self.decimal / self.aAmount;
-    }
-    else {
+    } else {
       return self.aAmount * self.decimal / self.bAmount;
     }
   }
@@ -172,8 +166,7 @@ contract Task3 with Deployable {
   get fun balance(jetton: Address): Int { 
     if (jetton == self.jettonAddressA) {
       return self.aAmount;
-    }
-    else {
+    } else {
       return self.bAmount;
     }
   }
