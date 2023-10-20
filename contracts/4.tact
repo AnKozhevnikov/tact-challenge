@@ -91,7 +91,7 @@ contract Task4 with Deployable {
       send(SendParameters{
           to: context().sender,
           value: 0,
-          mode: 128 + 64,
+          mode: 128,
           body: (Transfer{
             queryId: 0,
             newOwner: self.owner!!,
