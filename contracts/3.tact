@@ -70,17 +70,17 @@ contract Task3 with Deployable {
     require(sender() == self.jettonAddressA || sender() == self.jettonAddressB, "Amogus");
     if (sender()==self.jettonAddressA) {
         let toSend: Int = (self.aAmount * self.decimal / self.bAmount) * msg.amount / self.decimal;
-        let toTransfer: TokenTransfer = {
+        let toTransfer: TokenTransfer = TokenTransfer{
           queryId: msg.queryId+1,
-          amount: null,
+          amount: 0,
           destination: msg.from,
-          responseDestination: myAdress(),
+          responseDestination: myAddress(),
           customPayload: null,
           forwardTonAmount: ton("0.1"),
-          forwardPayLoad: emptySlice()
+          forwardPayload: emptySlice()
         };
-        let ad: Address = null;
-        if (toSend<slef.aAmount) {
+        let ad: Address = myAddress();
+        if (toSend<self.aAmount) {
           toTransfer.amount=msg.amount;
           ad=self.jettonAddressA;
         }
@@ -101,17 +101,17 @@ contract Task3 with Deployable {
     }
     else {
         let toSend: Int = (self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal;
-        let toTransfer: TokenTransfer = {
+        let toTransfer: TokenTransfer = TokenTransfer{
           queryId: msg.queryId+1,
-          amount: null,
+          amount: 0,
           destination: msg.from,
-          responseDestination: myAdress(),
+          responseDestination: myAddress(),
           customPayload: null,
           forwardTonAmount: ton("0.1"),
-          forwardPayLoad: emptySlice()
+          forwardPayload: emptySlice()
         };
-        let ad: Address = null;
-        if (toSend<slef.bAmount) {
+        let ad: Address = myAddress();
+        if (toSend<self.bAmount) {
           toTransfer.amount=msg.amount;
           ad=self.jettonAddressB;
         }
