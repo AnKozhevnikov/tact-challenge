@@ -56,6 +56,8 @@ contract Task3 with Deployable {
   jettonAddressA: Address;
   jettonAddressB: Address;
   decimal: Int;
+  empty: Slice;
+  myAd: Address;
 
   init(admin: Address, newJettonAddressA: Address, newJettonAddressB: Address) {
     self.owner = admin;
@@ -64,6 +66,8 @@ contract Task3 with Deployable {
     self.aAmount = 0;
     self.bAmount = 0;
     self.decimal = 1000000000;
+    self.empty = emptySlice();
+    self.myAd = myAddress();
   }
 
   receive(msg: TokenNotification) {
@@ -87,10 +91,10 @@ contract Task3 with Deployable {
               queryId: 0,
               amount: toSend,
               destination: msg.from,
-              responseDestination: myAddress(),
+              responseDestination: self.myAd,
               customPayload: null,
               forwardTonAmount: ton("0.01"),
-              forwardPayload: emptySlice()
+              forwardPayload: self.empty
             }.toCell()
           });
           self.aAmount = self.aAmount - toSend;
@@ -104,10 +108,10 @@ contract Task3 with Deployable {
               queryId: 0,
               amount: msg.amount,
               destination: msg.from,
-              responseDestination: myAddress(),
+              responseDestination: self.myAd,
               customPayload: null,
               forwardTonAmount: ton("0.01"),
-              forwardPayload: emptySlice()
+              forwardPayload: self.empty
             }.toCell()
           });
         }
@@ -122,10 +126,10 @@ contract Task3 with Deployable {
               queryId: 0,
               amount: toSend,
               destination: msg.from,
-              responseDestination: myAddress(),
+              responseDestination: self.myAd,
               customPayload: null,
               forwardTonAmount: ton("0.01"),
-              forwardPayload: emptySlice()
+              forwardPayload: self.empty
             }.toCell()
           });
           self.bAmount = self.bAmount - toSend;
@@ -139,10 +143,10 @@ contract Task3 with Deployable {
               queryId: 0,
               amount: msg.amount,
               destination: msg.from,
-              responseDestination: myAddress(),
+              responseDestination: self.myAd,
               customPayload: null,
               forwardTonAmount: ton("0.01"),
-              forwardPayload: emptySlice()
+              forwardPayload: self.empty
             }.toCell()
           });
         }
