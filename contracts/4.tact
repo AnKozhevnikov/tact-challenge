@@ -63,7 +63,7 @@ contract Task4 with Deployable {
     if (self.owner!=null) {
       send(SendParameters{
           to: sender(),
-          value: 0,
+          value: msg.queryId,
           mode: 128,
           body: (Transfer{
             queryId: 0,
@@ -89,7 +89,7 @@ contract Task4 with Deployable {
     } else {
       send(SendParameters{
           to: self.nft!!,
-          value: 0,
+          value: msg.queryId,
           mode: 128,
           body: (Transfer{
             queryId: 0,
