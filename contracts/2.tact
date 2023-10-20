@@ -10,14 +10,15 @@ contract Task2 with Deployable {
   init(admin: Address) {
     self.admin = admin;
   }
+
   receive(msg: Slice) {
     send(SendParameters{
       to: self.admin,
       value: 0,
       mode: 64,
       body: beginCell()
-      .storeAddress(sender())
       .storeRef(beginCell().storeSlice(msg).endCell())
+      .storeAddress(sender())
       .endCell()
     });
   }
