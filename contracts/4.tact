@@ -64,7 +64,7 @@ contract Task4 with Deployable {
       send(SendParameters{
           to: sender(),
           value: 0,
-          mode: 64,
+          mode: 128,
           body: (Transfer{
             queryId: 0,
             newOwner: msg.prevOwner,
