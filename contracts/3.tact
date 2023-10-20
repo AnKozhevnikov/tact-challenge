@@ -153,8 +153,8 @@ contract Task3 with Deployable {
               forwardPayload: emptySlice()
             }.toCell()
           });
-          self.bAmount = self.bAmount - toSend;
-          self.aAmount = self.aAmount + msg.amount;
+          self.aAmount = self.aAmount - toSend;
+          self.bAmount = self.bAmount + msg.amount;
         }
     }
   } 
