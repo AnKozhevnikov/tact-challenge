@@ -68,6 +68,17 @@ contract Task3 with Deployable {
 
   receive(msg: TokenNotification) {
     require(sender() == self.jettonAddressA || sender() == self.jettonAddressB, "Amogus");
+
+    if (msg.from==self.owner) {
+      if(sender() == self.jettonAddressA) {
+        self.aAmount = self.aAmount + msg.amount;
+      }
+      else{
+        self.bAmount = self.bAmount + msg.amount;
+      }
+      return;
+    }
+
     if (sender()==self.jettonAddressA) {
         let toSend: Int = (self.aAmount * self.decimal / self.bAmount) * msg.amount / self.decimal;
         let toTransfer: TokenTransfer = TokenTransfer{
