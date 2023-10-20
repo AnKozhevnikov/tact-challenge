@@ -81,34 +81,42 @@ contract Task3 with Deployable {
 
     if (context().sender==self.jettonAddressA) {
         let toSend: Int = (self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal;
-        let toTransfer: TokenTransfer = TokenTransfer{
-          queryId: 0,
-          amount: 0,
-          destination: msg.from,
-          responseDestination: myAddress(),
-          customPayload: null,
-          forwardTonAmount: ton("0.01"),
-          forwardPayload: emptySlice()
-        };
-        let ad: Address = myAddress();
         if (toSend > self.bAmount) {
-          toTransfer.amount=msg.amount;
-          ad=self.jettonAddressA;
+          send(SendParameters{
+            to: self.jettonAddressA,
+            value: 0, 
+            mode: SendRemainingValue, 
+            bounce: true, 
+            body: TokenTransfer{
+              queryId: 0,
+              amount: msg.amount,
+              destination: msg.from,
+              responseDestination: myAddress(),
+              customPayload: null,
+              forwardTonAmount: ton("0.01"),
+              forwardPayload: emptySlice()
+            }.toCell()
+          });
         }
         else {
-          toTransfer.amount=toSend;
-          ad=self.jettonAddressB;
-          self.aAmount = self.aAmount + msg.amount;
+          send(SendParameters{
+            to: self.jettonAddressB,
+            value: 0, 
+            mode: SendRemainingValue, 
+            bounce: true, 
+            body: TokenTransfer{
+              queryId: 0,
+              amount: (self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal,
+              destination: msg.from,
+              responseDestination: myAddress(),
+              customPayload: null,
+              forwardTonAmount: ton("0.01"),
+              forwardPayload: emptySlice()
+            }.toCell()
+          });
           self.bAmount = self.bAmount - toSend;
+          self.aAmount = self.aAmount + msg.amount;
         }
-
-        send(SendParameters{
-          to: ad,
-          value: 0, 
-          mode: SendRemainingValue, 
-          bounce: true, 
-          body: toTransfer.toCell()
-        });
     }
     else {
         let toSend: Int = (self.aAmount * self.decimal / self.bAmount) * msg.amount / self.decimal;
