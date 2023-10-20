@@ -87,7 +87,7 @@ contract Task3 with Deployable {
           destination: msg.from,
           responseDestination: myAddress(),
           customPayload: null,
-          forwardTonAmount: ton("0.1"),
+          forwardTonAmount: ton("0.01"),
           forwardPayload: emptySlice()
         };
         let ad: Address = myAddress();
@@ -118,7 +118,7 @@ contract Task3 with Deployable {
           destination: msg.from,
           responseDestination: myAddress(),
           customPayload: null,
-          forwardTonAmount: ton("0.1"),
+          forwardTonAmount: ton("0.01"),
           forwardPayload: emptySlice()
         };
         let ad: Address = myAddress();
