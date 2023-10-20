@@ -91,7 +91,7 @@ contract Task3 with Deployable {
       return self.aAmount * self.decimal / self.bAmount;
     }
     else {
-      throw(123);
+      return 0;
     }
   }
   
@@ -103,7 +103,7 @@ contract Task3 with Deployable {
       return self.bAmount;
     }
     else {
-      throw(123);
+      return 0;
     }
   }
 }
