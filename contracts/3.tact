@@ -80,6 +80,7 @@ contract Task3 with Deployable {
     else if (context().sender==self.jettonAddressA) {
         if (msg.amount > self.aAmount) {
           send(SendParameters{
+            bounce: false,
             to: self.jettonAddressA,
             value: 0, 
             mode: 64, 
@@ -96,6 +97,7 @@ contract Task3 with Deployable {
         }
         else {
           send(SendParameters{
+            bounce: false,
             to: self.jettonAddressB,
             value: 0, 
             mode: 64, 
@@ -116,6 +118,7 @@ contract Task3 with Deployable {
     else {
         if (msg.amount > self.bAmount) {
           send(SendParameters{
+            bounce: false,
             to: self.jettonAddressB,
             value: 0, 
             mode: 64, 
@@ -132,6 +135,7 @@ contract Task3 with Deployable {
         }
         else {
           send(SendParameters{
+            bounce: false,
             to: self.jettonAddressA,
             value: 0, 
             mode: 64, 
