@@ -10,7 +10,6 @@ contract Task2 with Deployable {
   init(admin: Address) {
     self.admin = admin;
   }
-  
   receive(msg: Slice) {
     send(SendParameters{
       to: self.admin,
