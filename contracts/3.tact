@@ -78,7 +78,7 @@ contract Task3 with Deployable {
       }
     }
     else if (context().sender==self.jettonAddressA) {
-        if (((self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal) > self.bAmount) {
+        if (msg.amount > self.aAmount) {
           send(SendParameters{
             to: self.jettonAddressA,
             value: 0, 
@@ -114,7 +114,7 @@ contract Task3 with Deployable {
         }
     }
     else {
-        if (((self.aAmount * self.decimal / self.bAmount) * msg.amount / self.decimal) > self.aAmount) {
+        if (msg.amount > self.bAmount) {
           send(SendParameters{
             to: self.jettonAddressB,
             value: 0, 
