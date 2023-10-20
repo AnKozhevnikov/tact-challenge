@@ -67,14 +67,14 @@ contract Task3 with Deployable {
   }
 
   receive(msg: TokenNotification) {
-    require(context().sender == self.owner, "Amogus");
+    /*require(context().sender == self.owner, "Amogus");
     if (msg.from==self.jettonAddressA) {
       self.aAmount = self.aAmount + msg.amount;
     } else if (msg.from==self.jettonAddressB) {
       self.bAmount = self.bAmount + msg.amount;
     } else {
       throw(123);
-    }
+    }*/
   } 
   
   get fun price(jetton: Address): Int { 
@@ -90,7 +90,7 @@ contract Task3 with Deployable {
     if (jetton == self.jettonAddressA) {
       return self.aAmount;
     }
-    else {
+    else if (jetton == self.jettonAddressB){
       return self.bAmount;
     }
   }
