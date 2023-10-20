@@ -76,14 +76,11 @@ contract Task3 with Deployable {
       }
       return self.bAmount * self.decimal / self.aAmount;
     }
-    else if (jetton==self.jettonAddressB){
+    else {
       if (self.bAmount==0) {
         return 0;
       }
       return self.aAmount * self.decimal / self.bAmount;
-    }
-    else {
-      return 0;
     }
   }
   
@@ -91,11 +88,8 @@ contract Task3 with Deployable {
     if (jetton == self.jettonAddressA) {
       return self.aAmount;
     }
-    else if (jetton == self.jettonAddressB){
-      return self.bAmount;
-    }
     else {
-      return 0;
+      return self.bAmount;
     }
   }
 }
