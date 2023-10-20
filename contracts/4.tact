@@ -51,13 +51,11 @@ contract Task4 with Deployable {
 
   owner: Address?;
   nft: Address?;
-  timeBegin: Int as uint32;
-  timeEnd: Int as uint32;
+  timeEnd: Int as uint64;
 
   
   init(seed: Int) {
     self.seed = seed; // needed to deploy multiple smart contracts copies from one admin address
-    self.timeBegin = 0;
     self.timeEnd = 4294967295;
   }
 
@@ -79,8 +77,8 @@ contract Task4 with Deployable {
     } else {
       self.owner = msg.prevOwner;
       self.nft = sender();
-      self.timeBegin = now();
-      self.timeEnd = now() + msg.forwardPayload.loadUint(32);
+      let a: Int = msg.forwardPayload.loadUint(32);
+      self.timeEnd = now() + a;
     }
   }
 
